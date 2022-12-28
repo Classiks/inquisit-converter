@@ -3,7 +3,6 @@ from modules.settings import Settings
 import modules.inquisit_elements as inquisit_elements
 
 class InquisitProgrammer:
-
     def __init__(self, settings: Settings) -> None:
         self.settings: Settings = settings
         self.current_x: float = settings.start_x

@@ -3,15 +3,16 @@ from modules.settings import Settings
 import modules.inquisit_elements as inquisit_elements
 
 class InquisitProgrammer:
-    text: str
-    out_string: str
-    text_stimuli_list: list[str]
-    inbetween_stimuli_list: list[str]
 
     def __init__(self, settings: Settings) -> None:
         self.settings: Settings = settings
         self.current_x: float = settings.start_x
         self.current_y: float = settings.start_y
+
+        self.text: str
+        self.out_string: str
+        self.text_stimuli_list: list[str]
+        self.inbetween_stimuli_list: list[str]
 
     def read_input_file(self) -> None:
         with open(self.settings.text_input_file, mode="r", encoding="utf-8") as infile:

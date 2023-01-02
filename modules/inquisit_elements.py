@@ -46,7 +46,8 @@ def build_expression_for_inbetween_stimulus(trial_name: str, element: str, setti
 
 
 def build_text_stimulus(name: str, letter: str, x_position: float, y_position: float, settings: Settings) -> str:
-    second_state_letter: str = letter if letter != " " else "/"  # Make visible if the space is clicked
+    first_state_letter: str = letter if letter != " " else "  "
+    second_state_letter: str = letter if letter != " " else "/ "  # Make visible if the space is clicked
     if settings.selection_strikethrough:
         second_state_letter = f"<s>{second_state_letter}</s>"
     if settings.selection_underline:
@@ -56,7 +57,7 @@ def build_text_stimulus(name: str, letter: str, x_position: float, y_position: f
 
     return f"""
 <text {name}>
-/ items = ("{letter}", "{second_state_letter}")
+/ items = ("{first_state_letter}", "{second_state_letter}")
 / position = ({x_position}px, {y_position}px)
 / select = values.{name}_state
 / txcolor = values.{name}_color

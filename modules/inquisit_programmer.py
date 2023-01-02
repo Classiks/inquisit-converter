@@ -43,7 +43,7 @@ class InquisitProgrammer:
     def create_values_block(self) -> str:
         values_block: str = "<values>\n"
         values_block += '\n'.join([
-            inquisit_elements.build_value_for_text_stimulus(
+            inquisit_elements.build_value(
                 element=el,
                 start_color=self.settings.text_color_state_1
             )
@@ -51,7 +51,7 @@ class InquisitProgrammer:
         ])
         values_block += '\n\n'
         values_block += '\n'.join([
-            inquisit_elements.build_value_for_inbetween_stimuli(
+            inquisit_elements.build_value(
                 element=el,
                 start_color=self.settings.inbetween_color_state_1
             )
@@ -85,7 +85,7 @@ class InquisitProgrammer:
         return expressions_block
 
     def create_inbetween_visible(self, name: str) -> str:
-        return inquisit_elements.build_inbetween_visible_stimulus(
+        return inquisit_elements.build_visible_shape(
             name=name,
             x_position=self.current_x,
             y_position=self.current_y,
@@ -109,7 +109,7 @@ class InquisitProgrammer:
         # create clickable element the size of x% of left letter + inbetweensize + x% of right letter to the left
         inbetween_clickable_x_size: float = self.settings.inbetween_visible_size_x_px + left_letter_overlap + right_letter_overlap
 
-        return inquisit_elements.build_inbetween_clickable_stimulus(
+        return inquisit_elements.build_clickable_shape(
             name=name,
             x_position=overlapping_x,
             y_position=self.current_y,

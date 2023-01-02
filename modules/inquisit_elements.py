@@ -8,12 +8,7 @@ def build_defaults_tag(fontfamily: str, fontsize: float) -> str:
 </defaults>
 """
 
-def build_value_for_text_stimulus(element: str, start_color) -> str:
-    return f"""/ {element}_state = 1
-/ {element}_color = "{start_color}"
-"""
-
-def build_value_for_inbetween_stimuli(element: str, start_color: str) -> str:
+def build_value(element: str, start_color) -> str:
     return f"""/ {element}_state = 1
 / {element}_color = "{start_color}"
 """
@@ -51,7 +46,7 @@ def build_expression_for_inbetween_stimulus(trial_name: str, element: str, setti
 
 
 def build_text_stimulus(name: str, letter: str, x_position: float, y_position: float, settings: Settings) -> str:
-    second_state_letter: str = letter
+    second_state_letter: str = letter if letter != " " else "/"  # Make visible if the space is clicked
     if settings.selection_strikethrough:
         second_state_letter = f"<s>{second_state_letter}</s>"
     if settings.selection_underline:
@@ -71,26 +66,26 @@ def build_text_stimulus(name: str, letter: str, x_position: float, y_position: f
 </text>
 """
 
-def build_inbetween_visible_stimulus(name: str, width: float, height: float, x_position: float, y_position: float) -> str:
-    return f"""
-<shape {name}_visible>
-/ shape = rectangle
-/ size = ({width}px, {height}px)
-/ position = ({x_position}px, {y_position}px)
-/ color = values.{name}_color
-/ valign = bottom
-/ halign = left
-/ erase = false
-</shape>
-"""
-
-def build_inbetween_clickable_stimulus(name: str, width: float, height: float, x_position: float, y_position: float, color: str) -> str:
+def build_clickable_shape(name: str, width: float, height: float, x_position: float, y_position: float, color: str) -> str:
     return f"""
 <shape {name}_clickable>
 / shape = rectangle
 / size = ({width}px, {height}px)
 / position = ({x_position}px, {y_position}px)
 / color = {color}
+/ valign = bottom
+/ halign = left
+/ erase = false
+</shape>
+"""
+
+def build_visible_shape(name: str, width: float, height: float, x_position: float, y_position: float) -> str:
+    return f"""
+<shape {name}_visible>
+/ shape = rectangle
+/ size = ({width}px, {height}px)
+/ position = ({x_position}px, {y_position}px)
+/ color = values.{name}_color
 / valign = bottom
 / halign = left
 / erase = false
